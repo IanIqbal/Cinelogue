@@ -3,7 +3,6 @@ import { getPopularMovie, getPopularSeries } from "../store/action"
 import { useEffect } from "react"
 import CardRow from "../components/Cardrow"
 import "./Home.css"
-import { Helmet } from "react-helmet"
 export default function Home() {
     const dispatch = useDispatch()
 
@@ -13,22 +12,22 @@ export default function Home() {
         dispatch(getPopularMovie())
         dispatch(getPopularSeries())
 
-        const script = document.createElement('script');
+        // const script = document.createElement('script');
 
-        if (
-            navigator.userAgent.indexOf("AlipayClient") > -1 ||
-            navigator.userAgent.indexOf("mPaaSClient") > -1
-        ) {
+        // if (
+        //     navigator.userAgent.indexOf("AlipayClient") > -1 ||
+        //     navigator.userAgent.indexOf("mPaaSClient") > -1
+        // ) {
 
-            script.src = "https://appx/web-view.min.js";
-            script.type = "text/javascript";
-            script.async = true;
-            document.head.appendChild(script);
-        }
+        //     script.src = "https://appx/web-view.min.js";
+        //     script.type = "text/javascript";
+        //     script.async = true;
+        //     document.head.appendChild(script);
+        // }
 
-        return () => {
-            document.head.removeChild(script);
-        };
+        // return () => {
+        //     document.head.removeChild(script);
+        // };
 
 
     }, [])
@@ -36,12 +35,14 @@ export default function Home() {
     console.log(popularMovies);
     console.log(popularSeries);
     const toMpaas = () => {
-
+        
         if (
             navigator.userAgent.indexOf("AlipayClient") > -1 ||
             navigator.userAgent.indexOf("mPaaSClient") > -1
         ) {
-            window.my.navigateTo({ url: "/pages/adit/home/home" })
+            let test = { payload: popularMovies.results[0] }
+
+            window.my.navigateTo({ url: "/pages/adit/home/home?message=" + encodeURIComponent(JSON.stringify(test)) })
         }
     }
     return (
