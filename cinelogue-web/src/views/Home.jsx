@@ -41,7 +41,7 @@ export default function Home() {
             navigator.userAgent.indexOf("AlipayClient") > -1 ||
             navigator.userAgent.indexOf("mPaaSClient") > -1
         ) {
-            my.navigateTo({ url: "/pages/adit/home/home" })
+            window.my.navigateTo({ url: "/pages/adit/home/home" })
         }
     }
     return (
@@ -56,6 +56,7 @@ export default function Home() {
                 <CardRow items={popularMovies.results} ></CardRow>
                 <h1>Popular Series</h1>
                 <CardRow items={popularSeries.results} ></CardRow>
+
             </div>
         </>
     )
