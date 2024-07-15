@@ -13,15 +13,22 @@ export default function Home() {
         dispatch(getPopularMovie())
         dispatch(getPopularSeries())
 
-        // const script = document.createElement('script');
-        // script.src = "https://appx/web-view.min.js";
-        // script.type = "text/javascript";
-        // script.async = true;
-        // document.body.appendChild(script);
+        const script = document.createElement('script');
 
-        // return () => {
-        //     document.body.removeChild(script);
-        // };
+        if (
+            navigator.userAgent.indexOf("AlipayClient") > -1 ||
+            navigator.userAgent.indexOf("mPaaSClient") > -1
+        ) {
+
+            script.src = "https://appx/web-view.min.js";
+            script.type = "text/javascript";
+            script.async = true;
+            document.head.appendChild(script);
+        }
+
+        return () => {
+            document.head.removeChild(script);
+        };
 
 
     }, [])
@@ -30,12 +37,12 @@ export default function Home() {
     console.log(popularSeries);
     const toMpaas = () => {
 
-        // if (
-        //     navigator.userAgent.indexOf("AlipayClient") > -1 ||
-        //     navigator.userAgent.indexOf("mPaaSClient") > -1
-        // ) {
-        //     my.navigateTo({ url: "/pages/adit/home/home" })
-        // }
+        if (
+            navigator.userAgent.indexOf("AlipayClient") > -1 ||
+            navigator.userAgent.indexOf("mPaaSClient") > -1
+        ) {
+            my.navigateTo({ url: "/pages/adit/home/home" })
+        }
     }
     return (
         <>
