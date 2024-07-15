@@ -30,12 +30,12 @@ export default function Home() {
     console.log(popularSeries);
     const toMpaas = () => {
 
-        if (
-            navigator.userAgent.indexOf("AlipayClient") > -1 ||
-            navigator.userAgent.indexOf("mPaaSClient") > -1
-        ) {
-            my.navigateTo({ url: "/pages/adit/home/home" })
-        }
+        // if (
+        //     navigator.userAgent.indexOf("AlipayClient") > -1 ||
+        //     navigator.userAgent.indexOf("mPaaSClient") > -1
+        // ) {
+        //     my.navigateTo({ url: "/pages/adit/home/home" })
+        // }
     }
     return (
         <>
