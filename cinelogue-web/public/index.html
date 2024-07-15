@@ -33,7 +33,20 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Cinelogue</title>
-    <script type="text/javascript" src="https://appx/web-view.min.js"></script>
+    <script>
+      if (
+        navigator.userAgent.indexOf("AlipayClient") > -1 ||
+        navigator.userAgent.indexOf("mPaaSClient") > -1
+      ) {
+        document.writeln(
+          '<script src="https://appx/web-view.min.js"' +
+            ">" +
+            "<" +
+            "/" +
+            "script>"
+        );
+      }
+    </script>
   </head>
 
   <body>
