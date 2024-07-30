@@ -28,7 +28,16 @@ export default function Home() {
         // return () => {
         //     document.head.removeChild(script);
         // };
+        if (
+            navigator.userAgent.indexOf("AlipayClient") > -1 ||
+            navigator.userAgent.indexOf("mPaaSClient") > -1
+        ) {
+            window.my.postMessage({message:"request location"})
 
+            window.my.onMessage = function(e){
+                console.log(e, "<<<<<<< dari mpaas")
+            }
+        }
 
     }, [])
 
