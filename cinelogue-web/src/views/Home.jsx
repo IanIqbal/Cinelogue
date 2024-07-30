@@ -33,10 +33,13 @@ export default function Home() {
             navigator.userAgent.indexOf("mPaaSClient") > -1
         ) {
             window.my.postMessage({message:"request location"})
+            console.log("atasnya onMessage");
 
-            window.my.onMessage = function(e){
+            window.my.onMessage = async function(e){
                 console.log(e, "<<<<<<< dari mpaas")
             }
+
+            console.log("bawahnya onMessage");
         }
 
     }, [])
