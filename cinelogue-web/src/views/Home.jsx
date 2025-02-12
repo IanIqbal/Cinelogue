@@ -14,10 +14,9 @@ export default function Home() {
     }, [])
     return (
         <>
-        
+
             <div className="main-container">
                 <h1>Popular Movies</h1>
-                <button onClick={toMpaas}>To Mpaas</button>
                 <CardRow items={popularMovies.results} ></CardRow>
                 <h1>Popular Series</h1>
                 <CardRow items={popularSeries.results} ></CardRow>
