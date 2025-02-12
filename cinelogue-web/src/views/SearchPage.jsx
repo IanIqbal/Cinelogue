@@ -36,8 +36,7 @@ export default function SearchPage() {
 
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
-    // console.log(moviesGenres);
-    // console.log(searchParams.get("query"));
+    
     return (
         <div className="main-container">
             <h1>Search</h1>

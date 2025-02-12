@@ -99,11 +99,8 @@ export const getMovieDetailCredits = (id)=>{
 
             let creditsDataClean = creditsDataRaw.data
 
-            console.log(data);
-            console.log(creditsDataClean);
             return {detail:data, credits:creditsDataClean}
         } catch (error) {
-            console.log(error);
             return error
         }
     }
@@ -125,11 +122,8 @@ export const getSeriesDetailCredits = (id) =>{
 
             let creditsDataClean = creditsDataRaw.data
 
-            console.log(data);
-            console.log(creditsDataClean);
             return {detail:data, credits:creditsDataClean}
         } catch (error) {
-            console.log(error);
             return error
         }
     }
@@ -145,7 +139,6 @@ export const getSeriesGenres = () => {
 
             dispatch(getSeriesGenresDone(data))
         } catch (error) {
-            console.log(error);
             return error
         }
     }
@@ -160,9 +153,7 @@ export const getMoviesGenres = () => {
             })
 
             dispatch(getMoviesGenresDone(data))
-            console.log(data);
         } catch (error) {
-            console.log(error);
             return error
         }
     }
@@ -176,7 +167,6 @@ export const getPopularMovie = () => {
                 method: "get"
             })
 
-            // console.log(data);
 
             let limitedData = []
 
@@ -191,7 +181,6 @@ export const getPopularMovie = () => {
         }
 
         catch (error) {
-            console.log(error);
             return error
         }
     }
@@ -220,7 +209,6 @@ export const getPopularSeries = () => {
 
             dispatch(getPopularSeriesDone(data))
         } catch (error) {
-            console.log(error);
             return error
         }
     }
@@ -246,7 +234,6 @@ export function getMoviesByCategory(category = "top_rated", page = 1) {
                 if (currentCategory != category || page == 1) {
                     movies = []
                 }
-                // console.log(movies);
                 if (movies.length > 0 ) {
 
                     movies = [...movies, ...data.results]
@@ -255,7 +242,6 @@ export function getMoviesByCategory(category = "top_rated", page = 1) {
                     movies = [...data.results]
                 }
 
-                // console.log(data.results.length);
                 dispatch(getMoviesByCategoryDone(data))
                 currentCategory = category
             } else {
@@ -286,7 +272,6 @@ export function getMoviesByCategory(category = "top_rated", page = 1) {
             }
 
         } catch (error) {
-            console.log(error);
             return error
         }
     }
@@ -352,7 +337,6 @@ export function getSeriesByCategory(category = "top_rated", page = 1) {
             }
 
         } catch (error) {
-            console.log(error);
             return error
         }
     }
@@ -364,12 +348,10 @@ export const getSearchResult = (query, page = 1)=>{
     return async(dispatch) => {
         try {
             const {data} = await axios({
-                // url:"https://api.themoviedb.org/3/search/multi?api_key=b860a096974243a697b8c332fdc7be7a&language=en-US&query=dwayne&page=1&include_adult=true",
                 url:`${baseUrl}/search/multi?${apiKey}&query=${query}&page=${page}&include_adult=false`,
                 method:"get"
             })
 
-            // console.log(data.results);
 
             if(currentQuery != query || page == 1){
                 searchResult = []
@@ -381,15 +363,13 @@ export const getSearchResult = (query, page = 1)=>{
             }else{
                 searchResult = [...data.results]
             }
-            // console.log(query);
-            // console.log(data.results);
+         
             if(page >= data.total_pages){
                 data.isMaxReached = true
             }
             dispatch(getSearchResultDONE(data))
             currentQuery = query
         } catch (error) {
-            // console.log(error);
             return error
         }
     }

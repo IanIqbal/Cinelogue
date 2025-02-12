@@ -11,58 +11,10 @@ export default function Home() {
     useEffect(() => {
         dispatch(getPopularMovie())
         dispatch(getPopularSeries())
-
-        // const script = document.createElement('script');
-
-        // if (
-        //     navigator.userAgent.indexOf("AlipayClient") > -1 ||
-        //     navigator.userAgent.indexOf("mPaaSClient") > -1
-        // ) {
-
-        //     script.src = "https://appx/web-view.min.js";
-        //     script.type = "text/javascript";
-        //     script.async = true;
-        //     document.head.appendChild(script);
-        // }
-
-        // return () => {
-        //     document.head.removeChild(script);
-        // };
-        if (
-            navigator.userAgent.indexOf("AlipayClient") > -1 ||
-            navigator.userAgent.indexOf("mPaaSClient") > -1
-        ) {
-            window.my.postMessage({message:"request location"})
-            console.log("atasnya onMessage");
-
-            window.my.onMessage = async function(e){
-                console.log(e, "<<<<<<< dari mpaas")
-            }
-
-            console.log("bawahnya onMessage");
-        }
-
     }, [])
-
-    console.log(popularMovies);
-    console.log(popularSeries);
-    const toMpaas = () => {
-        
-        if (
-            navigator.userAgent.indexOf("AlipayClient") > -1 ||
-            navigator.userAgent.indexOf("mPaaSClient") > -1
-        ) {
-            let test = { payload: popularMovies.results[0] }
-
-            window.my.navigateTo({ url: "/pages/adit/home/home?message=" + encodeURIComponent(JSON.stringify(test)) })
-        }
-    }
     return (
         <>
-            {/* <Helmet>
-                <script type="text/javascript" src="https://appx/web-view.min.js"></script>
-
-            </Helmet> */}
+        
             <div className="main-container">
                 <h1>Popular Movies</h1>
                 <button onClick={toMpaas}>To Mpaas</button>

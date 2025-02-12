@@ -32,7 +32,6 @@ export default function Series() {
 
         return () => document.removeEventListener("scroll", handleScroll)
     }, [])
-    console.log(seriesGenres);
     return (
         <div className="main-container">
             <h1>Series</h1>
@@ -45,7 +44,7 @@ export default function Series() {
                     </div>
                     <li>
 
-                        <select className="buttons-filter"  onChange={(e) => { e.preventDefault(); setCategory(e.target.value); dispatch(getSeriesByCategory(e.target.value)); console.log(e.target.value); }} name="genre">
+                        <select className="buttons-filter"  onChange={(e) => { e.preventDefault(); setCategory(e.target.value); dispatch(getSeriesByCategory(e.target.value));  }} name="genre">
                         <option value="">Select by Genre</option>
                             
                             {seriesGenres.genres ? seriesGenres.genres.map(el =>

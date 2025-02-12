@@ -19,7 +19,6 @@ export default function DetailPageSeries() {
 
         return () => setItem({})
     }, [])
-    console.log(item);
     return (
         <div className="detail-page">
             {item.detail && (
