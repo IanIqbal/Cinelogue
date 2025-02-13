@@ -10,7 +10,7 @@ export default function SearchPage() {
     const dispatch = useDispatch()
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(true)
-    const searchResult = useSelector((state) => state.searchResult)
+    const searchResult = useSelector((state) => state.mainSlice.searchResult)
     const [searchParams, setSearchParams] = useSearchParams()
     function handleScroll() {
             if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
@@ -36,7 +36,7 @@ export default function SearchPage() {
 
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
-    
+
     return (
         <div className="main-container">
             <h1>Search</h1>

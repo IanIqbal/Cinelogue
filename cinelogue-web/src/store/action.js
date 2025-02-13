@@ -1,23 +1,10 @@
 import { GET_MOVIES_BY_CATEGORY, GET_POPULAR_MOVIES, GET_POPULAR_SERIES, GET_MOVIES_GENRES, GET_SERIES_GENRES, GET_SERIES_BY_CATEGORY, GET_SEARCH_RESULT, GET_MOVIE_DETAIL, GET_MOVIE_CREDITS, GET_SERIES_DETAIL, GET_SERIES_CREDITS } from "./actionType";
 import axios from "axios"
+import { getPopularMoviesSlice, getPopularSeriesSlice, getSearchResultSlice } from "./slice";
 
+const baseUrl = `${process.env.REACT_APP_MAIN_URL}`
 
-const baseUrl = "https://api.themoviedb.org/3"
 const apiKey = `api_key=${process.env.REACT_APP_TMDB_API}`
-
-const getPopularMoviesDone = (payload) => {
-    return {
-        type: GET_POPULAR_MOVIES,
-        payload
-    }
-}
-
-const getPopularSeriesDone = (payload) => {
-    return {
-        type: GET_POPULAR_SERIES,
-        payload
-    }
-}
 
 const getMoviesByCategoryDone = (payload) => {
     return {
@@ -47,40 +34,6 @@ const getSeriesGenresDone = (payload) => {
     }
 }
 
-const getSearchResultDONE = (payload)=>{
-    return {
-        type:GET_SEARCH_RESULT,
-        payload
-    }
-}
-
-const getMovieDetailDone = (payload)=>{
-    return{
-        type:GET_MOVIE_DETAIL,
-        payload
-    }
-}
-
-const getMovieCreditsDone = (payload) =>{
-    return{
-        type:GET_MOVIE_CREDITS,
-        payload
-    }
-}
-
-const getSeriesDetailDone = (payload) =>{
-    return{
-        type:GET_SERIES_DETAIL,
-        payload
-    }
-}
-
-const getSeriesCreditsDone = (payload)=>{
-    return{
-        type:GET_SERIES_CREDITS,
-        payload
-    }
-}
 
 export const getMovieDetailCredits = (id)=>{
     return async (dispatch)=>{
@@ -166,10 +119,9 @@ export const getPopularMovie = () => {
                 url: `${baseUrl}/movie/popular?${apiKey}`,
                 method: "get"
             })
-
-
+            
             let limitedData = []
-
+            
             data.results.forEach((el, index) => {
                 if (index < 14) {
                     el.media_type = "movie"
@@ -177,7 +129,7 @@ export const getPopularMovie = () => {
                 }
             })
             data.results = limitedData
-            dispatch(getPopularMoviesDone(data))
+            dispatch(getPopularMoviesSlice(data))
         }
 
         catch (error) {
@@ -207,7 +159,7 @@ export const getPopularSeries = () => {
             })
             data.results = limitedData
 
-            dispatch(getPopularSeriesDone(data))
+            dispatch(getPopularSeriesSlice(data))
         } catch (error) {
             return error
         }
@@ -367,7 +319,7 @@ export const getSearchResult = (query, page = 1)=>{
             if(page >= data.total_pages){
                 data.isMaxReached = true
             }
-            dispatch(getSearchResultDONE(data))
+            dispatch(getSearchResultSlice(data))
             currentQuery = query
         } catch (error) {
             return error

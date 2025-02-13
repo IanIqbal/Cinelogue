@@ -6,8 +6,8 @@ import "./Home.css"
 export default function Home() {
     const dispatch = useDispatch()
 
-    const popularMovies = useSelector((state) => state.popularMovies)
-    const popularSeries = useSelector((state) => state.popularSeries)
+    const popularMovies = useSelector((sliceState) => sliceState.mainSlice.popularMovies)
+    const popularSeries = useSelector((sliceState) => sliceState.mainSlice.popularSeries)
     useEffect(() => {
         dispatch(getPopularMovie())
         dispatch(getPopularSeries())

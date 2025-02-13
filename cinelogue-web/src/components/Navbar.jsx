@@ -1,14 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import "./Navbar-style.css"
 import { getSearchResult } from "../store/action"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState } from "react"
-import SearchPage from "../views/SearchPage"
+import {  useState } from "react"
 
 export default function Navbar() {
-    // const searchResult = useSelector((state) => state.searchResult)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [isSearch, setIsSearch] = useState(false)
