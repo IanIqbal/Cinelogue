@@ -1,38 +1,9 @@
-import { GET_MOVIES_BY_CATEGORY, GET_POPULAR_MOVIES, GET_POPULAR_SERIES, GET_MOVIES_GENRES, GET_SERIES_GENRES, GET_SERIES_BY_CATEGORY, GET_SEARCH_RESULT, GET_MOVIE_DETAIL, GET_MOVIE_CREDITS, GET_SERIES_DETAIL, GET_SERIES_CREDITS } from "./actionType";
 import axios from "axios"
-import { getPopularMoviesSlice, getPopularSeriesSlice, getSearchResultSlice } from "./slice";
+import { getMoviesByCategorySlice, getMoviesDetailSlice, getMoviesGenresSlice, getPopularMoviesSlice, getPopularSeriesSlice, getSearchResultSlice, getSeriesByCategorySlice, getSeriesDetailSlice, getSeriesGenresSlice } from "./slice";
 
 const baseUrl = `${process.env.REACT_APP_MAIN_URL}`
 
 const apiKey = `api_key=${process.env.REACT_APP_TMDB_API}`
-
-const getMoviesByCategoryDone = (payload) => {
-    return {
-        type: GET_MOVIES_BY_CATEGORY,
-        payload
-    }
-}
-
-const getSeriesByCategoryDone = (payload) => {
-    return {
-        type: GET_SERIES_BY_CATEGORY,
-        payload
-    }
-}
-
-const getMoviesGenresDone = (payload) => {
-    return {
-        type: GET_MOVIES_GENRES,
-        payload
-    }
-}
-
-const getSeriesGenresDone = (payload) => {
-    return {
-        type: GET_SERIES_GENRES,
-        payload
-    }
-}
 
 
 export const getMovieDetailCredits = (id)=>{
@@ -51,8 +22,8 @@ export const getMovieDetailCredits = (id)=>{
             })
 
             let creditsDataClean = creditsDataRaw.data
-
-            return {detail:data, credits:creditsDataClean}
+            console.log({detail:data, credits:creditsDataClean}, "<<<<<")
+            dispatch(getMoviesDetailSlice({detail:data, credits:creditsDataClean}))
         } catch (error) {
             return error
         }
@@ -75,7 +46,7 @@ export const getSeriesDetailCredits = (id) =>{
 
             let creditsDataClean = creditsDataRaw.data
 
-            return {detail:data, credits:creditsDataClean}
+            dispatch(getSeriesDetailSlice({detail:data, credits:creditsDataClean})) 
         } catch (error) {
             return error
         }
@@ -90,7 +61,7 @@ export const getSeriesGenres = () => {
                 method: "get"
             })
 
-            dispatch(getSeriesGenresDone(data))
+            dispatch(getSeriesGenresSlice(data))
         } catch (error) {
             return error
         }
@@ -105,7 +76,7 @@ export const getMoviesGenres = () => {
                 method: "get"
             })
 
-            dispatch(getMoviesGenresDone(data))
+            dispatch(getMoviesGenresSlice(data))
         } catch (error) {
             return error
         }
@@ -194,7 +165,7 @@ export function getMoviesByCategory(category = "top_rated", page = 1) {
                     movies = [...data.results]
                 }
 
-                dispatch(getMoviesByCategoryDone(data))
+                dispatch(getMoviesByCategorySlice(data))
                 currentCategory = category
             } else {
 
@@ -218,7 +189,7 @@ export function getMoviesByCategory(category = "top_rated", page = 1) {
                 }
 
                 data.results = movies
-                dispatch(getMoviesByCategoryDone(data))
+                dispatch(getMoviesByCategorySlice(data))
                 currentCategory = category
 
             }
@@ -259,7 +230,7 @@ export function getSeriesByCategory(category = "top_rated", page = 1) {
                 }
 
                 data.results = series
-                dispatch(getSeriesByCategoryDone(data))
+                dispatch(getSeriesByCategorySlice(data))
                 currentCategorySeries = category
             } else {
 
@@ -284,7 +255,7 @@ export function getSeriesByCategory(category = "top_rated", page = 1) {
                 }
 
                 data.results = series
-                dispatch(getSeriesByCategoryDone(data))
+                dispatch(getSeriesByCategorySlice(data))
                 currentCategorySeries = category
             }
 
