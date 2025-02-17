@@ -4,6 +4,7 @@ import { faFilm, faStar } from "@fortawesome/free-solid-svg-icons"
 import defaultPerson from "../images/default-person2.jpg"
 import defaultMovie from "../images/default-movie.png"
 import defaultTv from "../images/default-tv.jpg"
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import { useNavigate } from "react-router-dom"
 export default function Card({ item }) {
@@ -11,7 +12,7 @@ export default function Card({ item }) {
   return (
     <div className="card" key={item.id}>
 
-      {item.media_type == "movie" && item.poster_path && <img onClick={(e) => { e.preventDefault(); navigate(`/detail/${item.id}`) }} className={item.adult ? "nsfw-image" : ""} src={`https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.title} />}
+      {item.media_type == "movie" && item.poster_path && <LazyLoadImage placeholderSrc={defaultMovie} onClick={(e) => { e.preventDefault(); navigate(`/detail/${item.id}`) }} className={item.adult ? "nsfw-image" : ""} src={`https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.title} />}
       {item.media_type == "movie" && !item.poster_path && <img onClick={(e) => { e.preventDefault(); navigate(`/detail/${item.id}`) }} src={defaultMovie} alt={item.title} />}
 
       {item.media_type == "tv" && item.poster_path && <img onClick={(e) => { e.preventDefault(); navigate(`/detailseries/${item.id}`) }} className={item.adult ? "nsfw-image" : ""} src={`https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.title} />}
