@@ -7,8 +7,8 @@ import Loading from "../components/Loading"
 
 export default function Movies() {
     const dispatch = useDispatch()
-    const moviesByCategory = useSelector((state) => state.moviesByCategory)
-    const moviesGenres = useSelector((state => state.moviesGenres))
+    const moviesByCategory = useSelector((state) => state.mainSlice.moviesByCategory)
+    const moviesGenres = useSelector((state => state.mainSlice.moviesGenres))
     const [page, setPage] = useState(1)
     const [category, setCategory] = useState("top_rated")
     const [loading, setLoading] = useState(true)

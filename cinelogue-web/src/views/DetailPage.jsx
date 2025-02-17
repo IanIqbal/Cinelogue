@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getMovieDetailCredits } from "../store/action";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./DetailPage.css"
 import defaultPerson from "../images/default-person.jpg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { emptyMovieDetail } from "../store/slice";
 
 export default function DetailPage() {
     const { id } = useParams()
     const dispatch = useDispatch()
-    const [item, setItem] = useState({})
+    const item = useSelector((state)=> state.mainSlice.moviesDetail)
     useEffect(() => {
         dispatch(getMovieDetailCredits(id))
-            .then(response => {
-                setItem(response)
-            })
 
-        return () => setItem({})
+        return () => {
+            dispatch(emptyMovieDetail())
+        }
     }, [])
     return (
         <div className="detail-page">

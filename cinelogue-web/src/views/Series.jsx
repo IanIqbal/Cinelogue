@@ -7,8 +7,8 @@ import Loading from "../components/Loading"
 
 export default function Series() {
     const dispatch = useDispatch()
-    const seriesByCategory = useSelector((state) => state.seriesByCategory)
-    const seriesGenres = useSelector((state => state.seriesGenres))
+    const seriesByCategory = useSelector((state) => state.mainSlice.seriesByCategory)
+    const seriesGenres = useSelector((state => state.mainSlice.seriesGenres))
     const [page, setPage] = useState(1)
     const [category, setCategory] = useState("top_rated")
     const [loading, setLoading] = useState(true)
