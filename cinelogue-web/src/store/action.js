@@ -22,7 +22,7 @@ export const getMovieDetailCredits = (id)=>{
             })
 
             let creditsDataClean = creditsDataRaw.data
-            console.log({detail:data, credits:creditsDataClean}, "<<<<<")
+
             dispatch(getMoviesDetailSlice({detail:data, credits:creditsDataClean}))
         } catch (error) {
             return error
@@ -164,7 +164,7 @@ export function getMoviesByCategory(category = "top_rated", page = 1) {
                 } else {
                     movies = [...data.results]
                 }
-
+                
                 dispatch(getMoviesByCategorySlice(data))
                 currentCategory = category
             } else {
@@ -289,7 +289,7 @@ export const getSearchResult = (query, page = 1)=>{
          
             if(page >= data.total_pages){
                 data.isMaxReached = true
-            }
+            }       
             dispatch(getSearchResultSlice(data))
             currentQuery = query
         } catch (error) {
