@@ -7,18 +7,25 @@ import defaultPerson from "../images/default-person.jpg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { emptySeriesDetail } from "../store/slice";
+import LoadingDetail from "../components/LoadingDetail";
 
 export default function DetailPageSeries() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const item = useSelector((state)=> state.mainSlice.seriesDetail)
     useEffect(() => {
+
         dispatch(getSeriesDetailCredits(id))
 
         return () => dispatch(emptySeriesDetail())
     }, [])
     return (
         <div className="detail-page">
+             {!item.detail && (
+                <div className="loading-container"  >
+                <LoadingDetail></LoadingDetail>
+                </div>
+            )}
             {item.detail && (
                 <>
                     <div className="detail-main"  >

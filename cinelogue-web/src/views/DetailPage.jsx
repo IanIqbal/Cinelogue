@@ -7,13 +7,15 @@ import defaultPerson from "../images/default-person.jpg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { emptyMovieDetail } from "../store/slice";
+import LoadingDetail from "../components/LoadingDetail";
 
 export default function DetailPage() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const item = useSelector((state)=> state.mainSlice.moviesDetail)
     useEffect(() => {
-        dispatch(getMovieDetailCredits(id))
+            
+            dispatch(getMovieDetailCredits(id))
 
         return () => {
             dispatch(emptyMovieDetail())
@@ -21,6 +23,11 @@ export default function DetailPage() {
     }, [])
     return (
         <div className="detail-page">
+            {!item.detail && (
+                <div className="loading-container"  >
+                <LoadingDetail></LoadingDetail>
+                </div>
+            )}
             {item.detail && (
                 <>
                     <div className="detail-main"  >

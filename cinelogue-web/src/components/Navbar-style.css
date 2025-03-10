@@ -5,7 +5,6 @@
     color: #fff;
     height: 80px;
     justify-content: space-around;
-    /* padding: 0 20px; */
     padding-left: 5%;
   }
   
@@ -42,4 +41,21 @@
 
 .search-icon{
   margin: 0 4px;
+  color: rgb(35, 47, 62);
+}
+
+.input-container{
+  border-radius: 75px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  background-color: white;
+}
+.input-form{
+  border: none;
+}
+
+.input-form:focus{
+  outline: none;
 }

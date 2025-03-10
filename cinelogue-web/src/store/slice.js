@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit"
 
-const initialState = {popularMovies:{}, popularSeries:{},moviesByCategory:{},moviesGenres:{}, seriesGenres:{}, seriesByCategory:{}, searchResult:{}, moviesDetail:{}, seriesDetail:{}}
+const initialState = {popularMovies:{}, popularSeries:{},moviesByCategory:{},moviesGenres:{}, seriesGenres:{}, seriesByCategory:{}, searchResult:{}, moviesDetail:{}, seriesDetail:{}, currentSeriesPage:1}
 export const slice = createSlice({
     name:"mainSlice",
     initialState,
@@ -37,10 +37,17 @@ export const slice = createSlice({
         },
         emptySeriesDetail: (state,action) =>{
             state.seriesDetail = {}
-        } 
+        },
+        incrementSeriesPage: (state,action) =>{
+            state.currentSeriesPage++
+        },
+        resetSeriesPage: (state,action) =>{
+            state.currentSeriesPage = 1
+        }
+
     }
 })
 
-export const { getPopularMoviesSlice, getPopularSeriesSlice, getSearchResultSlice, getSeriesByCategorySlice, getSeriesGenresSlice, getMoviesGenresSlice, getMoviesByCategorySlice, getMoviesDetailSlice, emptyMovieDetail,getSeriesDetailSlice, emptySeriesDetail} = slice.actions
+export const { getPopularMoviesSlice, getPopularSeriesSlice, getSearchResultSlice, getSeriesByCategorySlice, getSeriesGenresSlice, getMoviesGenresSlice, getMoviesByCategorySlice, getMoviesDetailSlice, emptyMovieDetail,getSeriesDetailSlice, emptySeriesDetail, incrementSeriesPage, resetSeriesPage} = slice.actions
 
 export default slice.reducer
