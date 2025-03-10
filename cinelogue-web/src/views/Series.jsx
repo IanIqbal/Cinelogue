@@ -13,13 +13,7 @@ export default function Series() {
     const page = useSelector((state) => state.mainSlice.currentSeriesPage)
     const [category, setCategory] = useState("top_rated")
     const [loading, setLoading] = useState(true)
-    function handleScroll() {
-        console.log(window.innerHeight, "<<<<<< window innerheight");
-        
-        console.log(document.documentElement.scrollTop, "<<<<<< scrolltop");
-        console.log(document.documentElement.scrollHeight, "<<<<<< scrollheight");
-
-        
+    function handleScroll() {   
         if (window.innerHeight + document.documentElement.scrollTop + 1 > document.documentElement.scrollHeight) {
             setLoading(true)
             dispatch(incrementSeriesPage())
@@ -37,7 +31,6 @@ export default function Series() {
 
     useEffect(() => {
         document.addEventListener("scroll", handleScroll)
-        console.log(seriesByCategory, "<<<<<");
         
         return () => document.removeEventListener("scroll", handleScroll)
     }, [])
