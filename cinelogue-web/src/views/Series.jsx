@@ -4,18 +4,19 @@ import { getSeriesGenres, getSeriesByCategory } from "../store/action"
 import CardRow from "../components/Cardrow"
 import "./Home.css"
 import Loading from "../components/Loading"
+import { incrementSeriesPage } from "../store/slice"
 
 export default function Series() {
     const dispatch = useDispatch()
-    const seriesByCategory = useSelector((state) => state.seriesByCategory)
-    const seriesGenres = useSelector((state => state.seriesGenres))
-    const [page, setPage] = useState(1)
+    const seriesByCategory = useSelector((state) => state.mainSlice.seriesByCategory)
+    const seriesGenres = useSelector((state => state.mainSlice.seriesGenres))
+    const page = useSelector((state) => state.mainSlice.currentSeriesPage)
     const [category, setCategory] = useState("top_rated")
     const [loading, setLoading] = useState(true)
-    function handleScroll() {
-        if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
+    function handleScroll() {   
+        if (window.innerHeight + document.documentElement.scrollTop + 1 > document.documentElement.scrollHeight) {
             setLoading(true)
-            setPage(page => page + 1)
+            dispatch(incrementSeriesPage())
         }
     }
 
@@ -23,16 +24,16 @@ export default function Series() {
         setTimeout(()=>{
             setLoading(false)
         }, 2000)
+
         dispatch(getSeriesByCategory(category, page))
         dispatch(getSeriesGenres())
     }, [page])
 
     useEffect(() => {
         document.addEventListener("scroll", handleScroll)
-
+        
         return () => document.removeEventListener("scroll", handleScroll)
     }, [])
-    console.log(seriesGenres);
     return (
         <div className="main-container">
             <h1>Series</h1>
@@ -45,7 +46,7 @@ export default function Series() {
                     </div>
                     <li>
 
-                        <select className="buttons-filter"  onChange={(e) => { e.preventDefault(); setCategory(e.target.value); dispatch(getSeriesByCategory(e.target.value)); console.log(e.target.value); }} name="genre">
+                        <select className="buttons-filter"  onChange={(e) => { e.preventDefault(); setCategory(e.target.value); dispatch(getSeriesByCategory(e.target.value));  }} name="genre">
                         <option value="">Select by Genre</option>
                             
                             {seriesGenres.genres ? seriesGenres.genres.map(el =>

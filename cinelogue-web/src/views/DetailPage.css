@@ -163,3 +163,10 @@ z-index: 0;
 .detail-additional span{
     font-weight: 400;
 }
+
+.loading-container{
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  max-height: 1000px;
+}

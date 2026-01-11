@@ -56,5 +56,11 @@
 }
 .non-genre {
     display: flex;
+}
 
+.loading-container{
+    display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  max-height: 1000px;
 }

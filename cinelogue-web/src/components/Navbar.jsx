@@ -1,14 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import "./Navbar-style.css"
 import { getSearchResult } from "../store/action"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState } from "react"
-import SearchPage from "../views/SearchPage"
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import {  useState } from "react"
 
 export default function Navbar() {
-    // const searchResult = useSelector((state) => state.searchResult)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [isSearch, setIsSearch] = useState(false)
@@ -24,9 +22,8 @@ export default function Navbar() {
                 <NavLink  to="/movies">Movies</NavLink>
                 <NavLink  to="/series">TV Series</NavLink>
             </div>
-            <div>
-                <FontAwesomeIcon className="search-icon" onClick={()=>{setIsSearch(!isSearch); navigate("/search")  }}  icon={faSearch} ></FontAwesomeIcon>
-                 <input   onChange={ (e) => { e.preventDefault() ; 
+            <div className="input-container">
+                 <input className="input-form"   onChange={ (e) => { e.preventDefault() ; 
                     
                     if(e.target.value){
                         setTimeout(()=>{
@@ -34,7 +31,8 @@ export default function Navbar() {
                             dispatch(getSearchResult(e.target.value))
                         }, 2000)
                     }
-                    } }  type="text" />
+                } }  type="text" />
+                <FontAwesomeIcon className="search-icon" onClick={()=>{setIsSearch(!isSearch); navigate("/search")  }}  icon={faMagnifyingGlass} ></FontAwesomeIcon>
             </div>
 
         </nav>

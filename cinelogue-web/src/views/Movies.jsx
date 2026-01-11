@@ -7,15 +7,13 @@ import Loading from "../components/Loading"
 
 export default function Movies() {
     const dispatch = useDispatch()
-    const moviesByCategory = useSelector((state) => state.moviesByCategory)
-    const moviesGenres = useSelector((state => state.moviesGenres))
+    const moviesByCategory = useSelector((state) => state.mainSlice.moviesByCategory)
+    const moviesGenres = useSelector((state => state.mainSlice.moviesGenres))
     const [page, setPage] = useState(1)
     const [category, setCategory] = useState("top_rated")
     const [loading, setLoading] = useState(true)
     function handleScroll() {
-        // console.log(window.innerHeight);
-        // console.log(document.documentElement.scrollTop);
-        // console.log(document.documentElement.scrollHeight);
+       
         if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
             setLoading(true)
             setPage(prev => prev + 1)
@@ -31,13 +29,11 @@ export default function Movies() {
         dispatch(getMoviesGenres())
     }, [page])
     
-    console.log(page, moviesByCategory);
     useEffect(() => {
         window.addEventListener("scroll", handleScroll)
 
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
-    // console.log(moviesGenres);
     return (
         <div className="main-container">
             <h1>Movies</h1>
@@ -51,8 +47,7 @@ export default function Movies() {
                     </div>
                     <li>
 
-                        {/* <label for="genre">Select by Genre</label> */}
-                        <select className="buttons-filter" onChange={(e) => { e.preventDefault(); setCategory(e.target.value); dispatch(getMoviesByCategory(e.target.value)); console.log(e.target.value); }} name="genre">
+                        <select className="buttons-filter" onChange={(e) => { e.preventDefault(); setCategory(e.target.value); dispatch(getMoviesByCategory(e.target.value));}} name="genre">
                             <option value="">Select by Genre</option>
                             {moviesGenres.genres ? moviesGenres.genres.map(el =>
                                 <option value={el.id} >{el.name}</option>

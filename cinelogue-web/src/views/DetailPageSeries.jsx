@@ -1,27 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getSeriesDetailCredits } from "../store/action";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./DetailPage.css"
 import defaultPerson from "../images/default-person.jpg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { emptySeriesDetail } from "../store/slice";
+import LoadingDetail from "../components/LoadingDetail";
 
 export default function DetailPageSeries() {
     const { id } = useParams()
     const dispatch = useDispatch()
-    const [item, setItem] = useState({})
+    const item = useSelector((state)=> state.mainSlice.seriesDetail)
     useEffect(() => {
-        dispatch(getSeriesDetailCredits(id))
-            .then(response => {
-                setItem(response)
-            })
 
-        return () => setItem({})
+        dispatch(getSeriesDetailCredits(id))
+
+        return () => dispatch(emptySeriesDetail())
     }, [])
-    console.log(item);
     return (
         <div className="detail-page">
+             {!item.detail && (
+                <div className="loading-container"  >
+                <LoadingDetail></LoadingDetail>
+                </div>
+            )}
             {item.detail && (
                 <>
                     <div className="detail-main"  >
