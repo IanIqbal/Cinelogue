@@ -87,10 +87,11 @@ export const getPopularMovie = () => {
     return async (dispatch) => {
         try {
             const { data } = await axios({
-                url: `${baseUrl}/movie/popular?${apiKey}`,
+                url: `${baseUrl}/movies/popular`,
                 method: "get"
             })
-
+            console.log(data, "<<<");
+            
             let limitedData = []
 
             data.results.forEach((el, index) => {
@@ -113,7 +114,7 @@ export const getPopularSeries = () => {
     return async (dispatch) => {
         try {
             const { data } = await axios({
-                url: `${baseUrl}/tv/popular?${apiKey}`,
+                url: `${baseUrl}/series/popular`,
                 method: "get"
             })
 
