@@ -11,20 +11,15 @@ export const getMovieDetailCredits = (id) => {
         try {
 
             let { data } = await axios({
-                url: `${baseUrl}/movie/${id}?${apiKey}`,
+                url: `${baseUrl}/movies/detailCredits/${id}`,
                 method: "get"
             })
 
-
-            let creditsDataRaw = await axios({
-                url: `${baseUrl}/movie/${id}/credits?${apiKey}`,
-                method: "get"
-            })
-
-            let creditsDataClean = creditsDataRaw.data
+            let creditsDataClean = data.creditsData
 
             dispatch(getMoviesDetailSlice({ detail: data, credits: creditsDataClean }))
         } catch (error) {
+            console.log(error)
             return error
         }
     }
@@ -34,17 +29,11 @@ export const getSeriesDetailCredits = (id) => {
     return async (dispatch) => {
         try {
             let { data } = await axios({
-                url: `${baseUrl}/tv/${id}?${apiKey}`,
+                url: `${baseUrl}/series/detailCredits/${id}`,
                 method: "get"
             })
 
-
-            let creditsDataRaw = await axios({
-                url: `${baseUrl}/tv/${id}/credits?${apiKey}`,
-                method: "get"
-            })
-
-            let creditsDataClean = creditsDataRaw.data
+            let creditsDataClean = data.creditsData
 
             dispatch(getSeriesDetailSlice({ detail: data, credits: creditsDataClean }))
         } catch (error) {
