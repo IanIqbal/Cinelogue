@@ -46,7 +46,7 @@ export const getSeriesGenres = () => {
     return async (dispatch) => {
         try {
             const { data } = await axios({
-                url: `${baseUrl}/genre/tv/list?${apiKey}`,
+                url: `${baseUrl}/series/genres`,
                 method: "get"
             })
 
@@ -61,12 +61,14 @@ export const getMoviesGenres = () => {
     return async (dispatch) => {
         try {
             let { data } = await axios({
-                url: `${baseUrl}/genre/movie/list?${apiKey}&language=en-US`,
+                url: `${baseUrl}/movies/genres`,
                 method: "get"
             })
-
+            console.log(data, "<<< movies genre")
             dispatch(getMoviesGenresSlice(data))
         } catch (error) {
+            console.log(error, "<<<<");
+            
             return error
         }
     }
