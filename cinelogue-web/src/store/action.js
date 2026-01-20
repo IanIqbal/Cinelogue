@@ -135,10 +135,10 @@ export function getMoviesByCategory(category = "top_rated", page = 1) {
     return async (dispatch) => {
         try {
 
-            if (category == "top_rated" || category == "upcoming") {
+            if (category == "top_rated" || category == "upcoming" || category == "now_playing") {
 
                 let { data } = await axios({
-                    url: `${baseUrl}/movie/${category}?${apiKey}&language=en-US&page=${page}`,
+                    url: `${baseUrl}/movies/${category}?page=${page}`,
                     method: "get"
                 })
 
@@ -162,7 +162,7 @@ export function getMoviesByCategory(category = "top_rated", page = 1) {
             } else {
 
                 let { data } = await axios({
-                    url: `${baseUrl}/discover/movie?${apiKey}&include_adult=false&include_video=false&page=${page}&with_genres=${category}`,
+                    url: `${baseUrl}/movies/with_genres?page=${page}&genres=${category}`,
                     method: "get"
                 })
                 data.results.forEach(e => {
@@ -202,10 +202,10 @@ export function getSeriesByCategory(category = "top_rated", page = 1) {
             if (category == "top_rated" || category == "on_the_air") {
 
                 let { data } = await axios({
-                    url: `${baseUrl}/tv/${category}?${apiKey}&language=en-US&page=${page}`,
+                    url: `${baseUrl}/series/${category}?page=${page}`,
                     method: "get"
                 })
-
+                
                 data.results.forEach(e => {
                     e.media_type = "tv"
                 })
@@ -230,10 +230,11 @@ export function getSeriesByCategory(category = "top_rated", page = 1) {
             } else {
 
                 let { data } = await axios({
-                    url: `${baseUrl}/discover/tv?${apiKey}&include_adult=false&include_video=false&page=${page}&with_genres=${category}`,
+                    url: `${baseUrl}/series/with_genres?genres=${category}&page=${page}`,
                     method: "get"
                 })
-
+                console.log(data, "<<<<");
+                
                 data.results.forEach(e => {
                     e.media_type = "tv"
                 })
