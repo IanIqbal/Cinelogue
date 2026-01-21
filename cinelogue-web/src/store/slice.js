@@ -1,10 +1,13 @@
-import {createSlice} from "@reduxjs/toolkit"
+import {createSlice, current} from "@reduxjs/toolkit"
 
-const initialState = {popularMovies:{}, popularSeries:{},moviesByCategory:{},moviesGenres:{}, seriesGenres:{}, seriesByCategory:{}, searchResult:{}, moviesDetail:{}, seriesDetail:{}, currentSeriesPage:1}
+const initialState = {popularMovies:{}, popularSeries:{},moviesByCategory:{},moviesGenres:{}, seriesGenres:{}, seriesByCategory:{}, searchResult:{}, moviesDetail:{}, seriesDetail:{}, currentSeriesPage:1, isSearchLoading:false}
 export const slice = createSlice({
     name:"mainSlice",
     initialState,
     reducers: {
+        setSearchLoadingSlice:(state,action) =>{            
+            state.isSearchLoading = action.payload
+        },
         getPopularMoviesSlice: (state,action) => {
             state.popularMovies = action.payload
         },
@@ -48,6 +51,6 @@ export const slice = createSlice({
     }
 })
 
-export const { getPopularMoviesSlice, getPopularSeriesSlice, getSearchResultSlice, getSeriesByCategorySlice, getSeriesGenresSlice, getMoviesGenresSlice, getMoviesByCategorySlice, getMoviesDetailSlice, emptyMovieDetail,getSeriesDetailSlice, emptySeriesDetail, incrementSeriesPage, resetSeriesPage} = slice.actions
+export const { getPopularMoviesSlice, getPopularSeriesSlice, getSearchResultSlice, getSeriesByCategorySlice, getSeriesGenresSlice, getMoviesGenresSlice, getMoviesByCategorySlice, getMoviesDetailSlice, emptyMovieDetail,getSeriesDetailSlice, emptySeriesDetail, incrementSeriesPage, resetSeriesPage, setSearchLoadingSlice} = slice.actions
 
 export default slice.reducer
