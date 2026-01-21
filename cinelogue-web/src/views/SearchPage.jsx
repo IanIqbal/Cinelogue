@@ -22,8 +22,11 @@ export default function SearchPage() {
         setPage(1)
     },[searchParams.get("query")])
 
-  
-    useEffect(() => {
+  useEffect(()=>{
+     window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+  },[isSearchLoading])
+    useEffect(() => {        
         dispatch(getSearchResult(searchParams.get("query"), page))
     }, [page])
     useEffect(() => {
@@ -40,7 +43,7 @@ export default function SearchPage() {
             <div style={{ display: "flex", justifyContent: "center" }} >
 
                 {isSearchLoading && searchResult.page < searchResult.total_pages &&  <Loading></Loading>}
-                {searchResult.results.length > 0 &&searchResult.page >= searchResult.total_pages && searchParams.get("query") &&<h3>All data for "{searchParams.get("query")}" has been displayed</h3>}
+                {searchResult.results && searchResult.results.length > 0 &&searchResult.page >= searchResult.total_pages && searchParams.get("query") &&<h3>All data for "{searchParams.get("query")}" has been displayed</h3>}
             </div>
         </div>
     )
