@@ -12,8 +12,7 @@ export default function Movies() {
     const [page, setPage] = useState(1)
     const [category, setCategory] = useState("top_rated")
     const [loading, setLoading] = useState(true)
-    function handleScroll() {
-       
+    function handleScroll() {       
         if (!loading && (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight)) {
             setLoading(true)
             setPage(prev => prev + 1)
@@ -47,7 +46,7 @@ export default function Movies() {
                     <div className="non-genre">
                         
                     <li><button className="buttons-filter" onClick={(e) => { e.preventDefault(); setCategory("top_rated"); dispatch(getMoviesByCategory("top_rated")) }} >Top Rated</button></li>
-                    <li><button className="buttons-filter" onClick={(e) => { e.preventDefault(); setCategory("upcoming");console.log(category, "<<<<< button"); dispatch(getMoviesByCategory("upcoming")) }} >Upcoming</button></li>
+                    <li><button className="buttons-filter" onClick={(e) => { e.preventDefault(); setCategory("upcoming"); dispatch(getMoviesByCategory("upcoming")) }} >Upcoming</button></li>
                     </div>
                     <li>
 
