@@ -3,9 +3,6 @@ import { getMoviesByCategorySlice, getMoviesDetailSlice, getMoviesGenresSlice, g
 
 const baseUrl = `${process.env.REACT_APP_MAIN_URL}`
 
-const apiKey = `api_key=${process.env.REACT_APP_TMDB_API}`
-
-
 export const getMovieDetailCredits = (id) => {
     return async (dispatch) => {
         try {
