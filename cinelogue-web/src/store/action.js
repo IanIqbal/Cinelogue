@@ -1,27 +1,18 @@
 import axios from "axios"
-import { getMoviesByCategorySlice, getMoviesDetailSlice, getMoviesGenresSlice, getPopularMoviesSlice, getPopularSeriesSlice, getSearchResultSlice, getSeriesByCategorySlice, getSeriesDetailSlice, getSeriesGenresSlice, incrementSeriesPage, resetSeriesPage } from "./slice";
+import { getMoviesByCategorySlice, getMoviesDetailSlice, getMoviesGenresSlice, getPopularMoviesSlice, getPopularSeriesSlice, getSearchResultSlice, getSeriesByCategorySlice, getSeriesDetailSlice, getSeriesGenresSlice, incrementSeriesPage, resetSeriesPage,setSearchLoadingSlice } from "./slice";
 
 const baseUrl = `${process.env.REACT_APP_MAIN_URL}`
-
-const apiKey = `api_key=${process.env.REACT_APP_TMDB_API}`
-
 
 export const getMovieDetailCredits = (id) => {
     return async (dispatch) => {
         try {
 
             let { data } = await axios({
-                url: `${baseUrl}/movie/${id}?${apiKey}`,
+                url: `${baseUrl}/movies/detailCredits/${id}`,
                 method: "get"
             })
 
-
-            let creditsDataRaw = await axios({
-                url: `${baseUrl}/movie/${id}/credits?${apiKey}`,
-                method: "get"
-            })
-
-            let creditsDataClean = creditsDataRaw.data
+            let creditsDataClean = data.creditsData
 
             dispatch(getMoviesDetailSlice({ detail: data, credits: creditsDataClean }))
         } catch (error) {
@@ -34,17 +25,11 @@ export const getSeriesDetailCredits = (id) => {
     return async (dispatch) => {
         try {
             let { data } = await axios({
-                url: `${baseUrl}/tv/${id}?${apiKey}`,
+                url: `${baseUrl}/series/detailCredits/${id}`,
                 method: "get"
             })
 
-
-            let creditsDataRaw = await axios({
-                url: `${baseUrl}/tv/${id}/credits?${apiKey}`,
-                method: "get"
-            })
-
-            let creditsDataClean = creditsDataRaw.data
+            let creditsDataClean = data.creditsData
 
             dispatch(getSeriesDetailSlice({ detail: data, credits: creditsDataClean }))
         } catch (error) {
@@ -57,7 +42,7 @@ export const getSeriesGenres = () => {
     return async (dispatch) => {
         try {
             const { data } = await axios({
-                url: `${baseUrl}/genre/tv/list?${apiKey}`,
+                url: `${baseUrl}/series/genres`,
                 method: "get"
             })
 
@@ -72,12 +57,12 @@ export const getMoviesGenres = () => {
     return async (dispatch) => {
         try {
             let { data } = await axios({
-                url: `${baseUrl}/genre/movie/list?${apiKey}&language=en-US`,
+                url: `${baseUrl}/movies/genres`,
                 method: "get"
             })
-
             dispatch(getMoviesGenresSlice(data))
         } catch (error) {
+            
             return error
         }
     }
@@ -87,10 +72,10 @@ export const getPopularMovie = () => {
     return async (dispatch) => {
         try {
             const { data } = await axios({
-                url: `${baseUrl}/movie/popular?${apiKey}`,
+                url: `${baseUrl}/movies/popular`,
                 method: "get"
             })
-
+            
             let limitedData = []
 
             data.results.forEach((el, index) => {
@@ -113,7 +98,7 @@ export const getPopularSeries = () => {
     return async (dispatch) => {
         try {
             const { data } = await axios({
-                url: `${baseUrl}/tv/popular?${apiKey}`,
+                url: `${baseUrl}/series/popular`,
                 method: "get"
             })
 
@@ -143,10 +128,10 @@ export function getMoviesByCategory(category = "top_rated", page = 1) {
     return async (dispatch) => {
         try {
 
-            if (category == "top_rated" || category == "upcoming") {
+            if (category == "top_rated" || category == "upcoming" || category == "now_playing") {
 
                 let { data } = await axios({
-                    url: `${baseUrl}/movie/${category}?${apiKey}&language=en-US&page=${page}`,
+                    url: `${baseUrl}/movies/${category}?page=${page}`,
                     method: "get"
                 })
 
@@ -170,7 +155,7 @@ export function getMoviesByCategory(category = "top_rated", page = 1) {
             } else {
 
                 let { data } = await axios({
-                    url: `${baseUrl}/discover/movie?${apiKey}&include_adult=false&include_video=false&page=${page}&with_genres=${category}`,
+                    url: `${baseUrl}/movies/with_genres?page=${page}&genres=${category}`,
                     method: "get"
                 })
                 data.results.forEach(e => {
@@ -210,10 +195,10 @@ export function getSeriesByCategory(category = "top_rated", page = 1) {
             if (category == "top_rated" || category == "on_the_air") {
 
                 let { data } = await axios({
-                    url: `${baseUrl}/tv/${category}?${apiKey}&language=en-US&page=${page}`,
+                    url: `${baseUrl}/series/${category}?page=${page}`,
                     method: "get"
                 })
-
+                
                 data.results.forEach(e => {
                     e.media_type = "tv"
                 })
@@ -238,10 +223,10 @@ export function getSeriesByCategory(category = "top_rated", page = 1) {
             } else {
 
                 let { data } = await axios({
-                    url: `${baseUrl}/discover/tv?${apiKey}&include_adult=false&include_video=false&page=${page}&with_genres=${category}`,
+                    url: `${baseUrl}/series/with_genres?genres=${category}&page=${page}`,
                     method: "get"
                 })
-
+                
                 data.results.forEach(e => {
                     e.media_type = "tv"
                 })
@@ -273,9 +258,10 @@ let searchResult = []
 let currentQuery
 export const getSearchResult = (query, page = 1) => {
     return async (dispatch) => {
+        dispatch(setSearchLoadingSlice(true))
         try {
             const { data } = await axios({
-                url: `${baseUrl}/search/multi?${apiKey}&query=${query}&page=${page}&include_adult=false`,
+                url: `${baseUrl}/general/search?query=${query}&page=${page}`,
                 method: "get"
             })
 
@@ -298,6 +284,14 @@ export const getSearchResult = (query, page = 1) => {
             currentQuery = query
         } catch (error) {
             return error
+        } finally{
+             dispatch(setSearchLoadingSlice(false))
         }
+    }
+}
+
+export const setSearchLoading = (value) => {
+    return  (dispatch) => {
+        dispatch(setSearchLoadingSlice(value))
     }
 }

@@ -12,13 +12,13 @@ export default function Card({ item }) {
   return (
     <div className="card" key={item.id}>
 
-      {item.media_type == "movie" && item.poster_path && <LazyLoadImage effect="blur" placeholderSrc={`https://image.tmdb.org/t/p/w100/${item.poster_path}`} onClick={(e) => { e.preventDefault(); navigate(`/detail/${item.id}`) }} className={item.adult ? "nsfw-image" : ""} src={`https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.title} />}
+      {item.media_type == "movie" && item.poster_path && <LazyLoadImage effect="blur" placeholderSrc={`https://image.tmdb.org/t/p/w92/${item.poster_path}`} onClick={(e) => { e.preventDefault(); navigate(`/detail/${item.id}`) }} className={item.adult ? "nsfw-image" : ""} src={`https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.title} />}
       {item.media_type == "movie" && !item.poster_path && <img onClick={(e) => { e.preventDefault(); navigate(`/detail/${item.id}`) }} src={defaultMovie} alt={item.title} />}
 
-      {item.media_type == "tv" && item.poster_path && <LazyLoadImage effect="blur" placeholderSrc={`https://image.tmdb.org/t/p/w100/${item.poster_path}`} onClick={(e) => { e.preventDefault(); navigate(`/detailseries/${item.id}`) }} className={item.adult ? "nsfw-image" : ""} src={`https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.title} />}
+      {item.media_type == "tv" && item.poster_path && <LazyLoadImage effect="blur" placeholderSrc={`https://image.tmdb.org/t/p/w92/${item.poster_path}`} onClick={(e) => { e.preventDefault(); navigate(`/detailseries/${item.id}`) }} className={item.adult ? "nsfw-image" : ""} src={`https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.title} />}
       {item.media_type == "tv" && !item.poster_path && <img onClick={(e) => { e.preventDefault(); navigate(`/detailseries/${item.id}`) }} src={defaultTv} alt={item.title} />}
 
-      {item.media_type == "person" && item.profile_path && <LazyLoadImage effect="blur" placeholderSrc={`https://image.tmdb.org/t/p/w100/${item.profile_path}`} onClick={(e) => { e.preventDefault(); navigate(`/detail/${item.id}`) }} className={item.adult ? "nsfw-image" : ""} src={`https://image.tmdb.org/t/p/original/${item.profile_path}`} alt={item.title} />}
+      {item.media_type == "person" && item.profile_path && <LazyLoadImage effect="blur" placeholderSrc={`https://image.tmdb.org/t/p/w92/${item.profile_path}`} onClick={(e) => { e.preventDefault(); navigate(`/detail/${item.id}`) }} className={item.adult ? "nsfw-image" : ""} src={`https://image.tmdb.org/t/p/original/${item.profile_path}`} alt={item.title} />}
       {item.media_type == "person" && !item.profile_path && <img src={defaultPerson} alt={item.title} />}
       {item.adult &&
 
