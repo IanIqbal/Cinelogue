@@ -14,7 +14,7 @@ export default function Series() {
     const [category, setCategory] = useState("top_rated")
     const [loading, setLoading] = useState(true)
     function handleScroll() {   
-        if (window.innerHeight + document.documentElement.scrollTop + 1 > document.documentElement.scrollHeight) {
+        if ( !loading && window.innerHeight + document.documentElement.scrollTop + 1 > document.documentElement.scrollHeight) {
             setLoading(true)
             dispatch(incrementSeriesPage())
         }
@@ -26,10 +26,13 @@ export default function Series() {
         }, 2000)
 
         dispatch(getSeriesByCategory(category, page))
-        dispatch(getSeriesGenres())
     }, [page])
-
+    useEffect(()=>{
+        document.addEventListener("scroll", handleScroll)
+        return () => document.removeEventListener("scroll", handleScroll)
+    }, [loading])
     useEffect(() => {
+        dispatch(getSeriesGenres())
         document.addEventListener("scroll", handleScroll)
         
         return () => document.removeEventListener("scroll", handleScroll)
