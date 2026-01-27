@@ -1,11 +1,11 @@
 import {createBrowserRouter, redirect} from "react-router-dom"
-import BasicLayout from "../layout/BasicLayout"
+import BasicLayout from "../layout/BasicLayout.jsx"
 import Home from "../views/Home.jsx"
-import Movies from "../views/Movies"
-import Series from "../views/Series"
-import SearchPage from "../views/SearchPage"
-import DetailPage from "../views/DetailPage"
-import DetailPageSeries from "../views/DetailPageSeries"
+import Movies from "../views/Movies.jsx"
+import Series from "../views/Series.jsx"
+import SearchPage from "../views/SearchPage.jsx"
+import DetailPage from "../views/DetailPage.jsx"
+import DetailPageSeries from "../views/DetailPageSeries.jsx"
 
 const router = createBrowserRouter([
     {
@@ -34,6 +34,10 @@ const router = createBrowserRouter([
             {
                 element:<DetailPageSeries></DetailPageSeries>,
                 path:"/detailseries/:id"
+            },
+            {
+                element:<Register></Register>,
+                path:"/register"
             }
         ]
     }

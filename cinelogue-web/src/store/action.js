@@ -1,7 +1,7 @@
 import axios from "axios"
 import { getMoviesByCategorySlice, getMoviesDetailSlice, getMoviesGenresSlice, getPopularMoviesSlice, getPopularSeriesSlice, getSearchResultSlice, getSeriesByCategorySlice, getSeriesDetailSlice, getSeriesGenresSlice, incrementSeriesPage, resetSeriesPage,setSearchLoadingSlice } from "./slice";
 
-const baseUrl = `${process.env.REACT_APP_MAIN_URL}`
+const baseUrl = `${import.meta.env.VITE_API_MAIN_URL}`
 
 export const getMovieDetailCredits = (id) => {
     return async (dispatch) => {
