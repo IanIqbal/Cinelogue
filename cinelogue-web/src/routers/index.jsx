@@ -35,10 +35,7 @@ const router = createBrowserRouter([
                 element:<DetailPageSeries></DetailPageSeries>,
                 path:"/detailseries/:id"
             },
-            {
-                element:<Register></Register>,
-                path:"/register"
-            }
+
         ]
     }
 ])
