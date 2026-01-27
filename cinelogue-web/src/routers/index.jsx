@@ -6,7 +6,7 @@ import Series from "../views/Series.jsx"
 import SearchPage from "../views/SearchPage.jsx"
 import DetailPage from "../views/DetailPage.jsx"
 import DetailPageSeries from "../views/DetailPageSeries.jsx"
-import Register from "../views/Register.jsx"
+
 const router = createBrowserRouter([
     {
         element:<BasicLayout></BasicLayout>,
