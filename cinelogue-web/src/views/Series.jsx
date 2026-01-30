@@ -39,7 +39,6 @@ export default function Series() {
     }, [])
     return (
         <div className="main-container">
-            <h1>Series</h1>
             <div className="button-category">
                 <ul>
                     <div className="non-genre" >

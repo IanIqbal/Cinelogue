@@ -37,7 +37,7 @@ export default function SearchPage() {
 
     return (
         <div className="main-container">
-            <h1>Search</h1>
+            <h1 className="mb-8 text-2xl">Search</h1>
 
             <CardRow items={searchResult.results} ></CardRow>
             <div style={{ display: "flex", justifyContent: "center" }} >
