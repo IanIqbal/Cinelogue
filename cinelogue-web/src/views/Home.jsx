@@ -38,7 +38,7 @@ export default function Home() {
 
                     <TabsContent value="movies">
 
-                        <Carousel  className="w-full sm:w-[85vw] max-w-none px-6 sm:px-0" >
+                        <Carousel opts={{slidesToScroll:"auto"}} className="w-full sm:w-[85vw] max-w-none px-6 sm:px-0" >
                             <CarouselContent className="ml-0 gap-4">
                                 {popularMovies.results ? popularMovies.results.map((_, index) => (
                                     <CarouselItem key={index} className="basis-full pl-0 sm:basis-1/2 sm:pl-4 lg:basis-1/4">
