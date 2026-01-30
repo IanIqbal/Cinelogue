@@ -39,14 +39,13 @@ export default function Movies() {
     }, [])
     return (
         <div className="main-container">
-            <h1>Movies</h1>
             <div className="button-category">
                 
                 <ul>
                     <div className="non-genre">
                         
                     <li><button className="buttons-filter" onClick={(e) => { e.preventDefault(); setCategory("top_rated"); dispatch(getMoviesByCategory("top_rated")) }} >Top Rated</button></li>
-                    <li><button className="buttons-filter" onClick={(e) => { e.preventDefault(); setCategory("upcoming"); dispatch(getMoviesByCategory("upcoming")) }} >Upcoming</button></li>
+                    <li><button className="buttons-filter" onClick={(e) => { e.preventDefault(); setCategory("upcoming"); dispatch(getMoviesByCategory("upcoming")) }} >New & Upcoming</button></li>
                     </div>
                     <li>
 
