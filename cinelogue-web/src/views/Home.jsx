@@ -38,11 +38,11 @@ export default function Home() {
 
                     <TabsContent value="movies">
 
-                        <Carousel opts={{slidesToScroll:"auto"}} className="w-full sm:w-[85vw] max-w-none" >
-                            <CarouselContent className="ml-4">
+                        <Carousel  className="w-full sm:w-[85vw] max-w-none px-6 sm:px-0" >
+                            <CarouselContent className="ml-0 gap-4">
                                 {popularMovies.results ? popularMovies.results.map((_, index) => (
-                                    <CarouselItem key={index} className="basis-1/2 pl-1 lg:basis-1/4">
-                                        <div className="p-1">
+                                    <CarouselItem key={index} className="basis-full pl-0 sm:basis-1/2 sm:pl-4 lg:basis-1/4">
+                                        <div className="flex justify-center p-1">
                                             <Card item={_} ></Card>
                                         </div>
                                     </CarouselItem>
@@ -51,18 +51,18 @@ export default function Home() {
                                         <LoadingDetail></LoadingDetail>
                                     </div>}
                             </CarouselContent>
-                            <CarouselPrevious />
-                            <CarouselNext />
+                            <CarouselPrevious className="left-2 md:-left-12" />
+                            <CarouselNext className="right-2 md:-right-12" />
                         </Carousel>
 
                     </TabsContent>
 
                     <TabsContent value="series">
-                        <Carousel opts={{slidesToScroll:"auto"}} className="w-full sm:w-[85vw] max-w-none" >
-                            <CarouselContent className="ml-4">
+                        <Carousel opts={{slidesToScroll:"auto"}} className="w-full sm:w-[85vw] max-w-none px-6 sm:px-0" >
+                            <CarouselContent className="ml-0 gap-4">
                                 {popularSeries.results ? popularSeries.results.map((_, index) => (
-                                    <CarouselItem key={index} className="basis-1/2 pl-1 lg:basis-1/4">
-                                        <div className="p-1">
+                                    <CarouselItem key={index} className="basis-full pl-0 sm:basis-1/2 sm:pl-4 lg:basis-1/4">
+                                        <div className="flex justify-center p-1">
                                             <Card item={_} ></Card>
                                         </div>
                                     </CarouselItem>
@@ -71,8 +71,8 @@ export default function Home() {
                                         <LoadingDetail></LoadingDetail>
                                     </div>}
                             </CarouselContent>
-                            <CarouselPrevious />
-                            <CarouselNext />
+                            <CarouselPrevious className="left-2 md:-left-12" />
+                            <CarouselNext className="right-2 md:-right-12" />
                         </Carousel>
                     </TabsContent>
                 </Tabs>

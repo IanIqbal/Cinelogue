@@ -34,7 +34,9 @@ export default function Card({ item }) {
         </div>
         {item.title && <h5 className="card-title">{item.title}</h5>}
         {item.release_date && <h5 className="card-title"> {`(${item.release_date.substr(0,4)})`}</h5>}
-        {item.name && <h5 className="card-title">{item.name} {item.first_air_date?`(${item.first_air_date.substr(0,4)})` : ""}</h5>}
+        {item.name && <h5 className="card-title">{item.name} </h5>}
+        {item.first_air_date && <h5 className="card-title"> {`(${item.first_air_date.substr(0,4)})`}</h5>}
+
       </div>
     </div>
   )
