@@ -1,6 +1,7 @@
 .main-container {
     display: row;
     justify-content: center;
+    margin-left: 9%;
 }
 
 .main-container h1 {
@@ -57,7 +58,10 @@
 .non-genre {
     display: flex;
 }
-
+.tabs-list{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 .loading-container{
     display: flex;
   justify-content: center;

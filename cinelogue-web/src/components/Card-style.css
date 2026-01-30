@@ -4,7 +4,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    padding-left: 9%;
   }
   
   .card {
@@ -23,19 +22,26 @@
   
   .card img {
     width: 100%;
-    height: auto;
+    height: 450px;
     object-fit: fill;
     border-radius: 10px 10px 0 0;
   }
   
   .card-body {
     padding: 1% 20px 20px 20px;
+    text-align: center;
   }
   
   .card-title {
     margin-bottom: 10px;
     font-size: 24px;
     font-weight: bold;
+
+      white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* A specific width is also necessary for the ellipsis to appear */
+  width: 250px; 
   }
   
   .card-text {

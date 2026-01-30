@@ -39,7 +39,6 @@ export default function Movies() {
     }, [])
     return (
         <div className="main-container">
-            <h1>Movies</h1>
             <div className="button-category">
                 
                 <ul>

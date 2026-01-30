@@ -1,37 +1,81 @@
 import { useDispatch, useSelector } from "react-redux"
 import { getPopularMovie, getPopularSeries } from "../store/action"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import CardRow from "../components/Cardrow"
 import "./Home.css"
 import LoadingDetail from "../components/LoadingDetail";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel"
+import { Card as CardShad, CardContent } from "@/components/ui/card"
 
+import Card from "@/components/Card"
 export default function Home() {
     const dispatch = useDispatch()
-
+    const [selectedTab, setSelectedTab] = useState("movies");
     const popularMovies = useSelector((sliceState) => sliceState.mainSlice.popularMovies)
     const popularSeries = useSelector((sliceState) => sliceState.mainSlice.popularSeries)
-    useEffect(() => {                
-            dispatch(getPopularMovie())
-            dispatch(getPopularSeries())
+    useEffect(() => {
+        dispatch(getPopularMovie())
+        dispatch(getPopularSeries())
     }, [])
+
+
     return (
         <>
 
             <div className="main-container">
-                <h1>Popular Movies</h1>
-                {popularMovies.results?.length?<CardRow items={popularMovies.results} ></CardRow> : 
-                    <div className="loading-container"  >
-                    <LoadingDetail></LoadingDetail>
-                    </div>
-                }
-                <h1>Popular Series</h1>
-                {popularSeries.results?.length? <CardRow items={popularSeries.results} ></CardRow> :
-                 <div className="loading-container"  >
-                 <LoadingDetail></LoadingDetail>
-                 </div>
-               }
-                
+                <Tabs style={{ display: "flex", justifyContent: "center" }} defaultValue="movies">
+                    <TabsList className="mt-10 mb-4" variant="line">
+                        <TabsTrigger value="movies">Popular Movies</TabsTrigger>
+                        <TabsTrigger value="series">Popular Series</TabsTrigger>
+                    </TabsList>
 
+                    <TabsContent value="movies">
+
+                        <Carousel opts={{slidesToScroll:"auto"}} className="w-full sm:w-[85vw] max-w-none" >
+                            <CarouselContent className="ml-4">
+                                {popularMovies.results ? popularMovies.results.map((_, index) => (
+                                    <CarouselItem key={index} className="basis-1/2 pl-1 lg:basis-1/4">
+                                        <div className="p-1">
+                                            <Card item={_} ></Card>
+                                        </div>
+                                    </CarouselItem>
+                                )) :
+                                    <div className="loading-container"  >
+                                        <LoadingDetail></LoadingDetail>
+                                    </div>}
+                            </CarouselContent>
+                            <CarouselPrevious />
+                            <CarouselNext />
+                        </Carousel>
+
+                    </TabsContent>
+
+                    <TabsContent value="series">
+                        <Carousel opts={{slidesToScroll:"auto"}} className="w-full sm:w-[85vw] max-w-none" >
+                            <CarouselContent className="ml-4">
+                                {popularSeries.results ? popularSeries.results.map((_, index) => (
+                                    <CarouselItem key={index} className="basis-1/2 pl-1 lg:basis-1/4">
+                                        <div className="p-1">
+                                            <Card item={_} ></Card>
+                                        </div>
+                                    </CarouselItem>
+                                )) :
+                                    <div className="loading-container"  >
+                                        <LoadingDetail></LoadingDetail>
+                                    </div>}
+                            </CarouselContent>
+                            <CarouselPrevious />
+                            <CarouselNext />
+                        </Carousel>
+                    </TabsContent>
+                </Tabs>
             </div>
         </>
     )

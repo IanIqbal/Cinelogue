@@ -16,7 +16,7 @@ export default function Navbar() {
     return (
         <nav className="navbar">
             <div className="navbar-logo">
-                <h2>Cinelogue</h2>
+                <h1>Cinelogue</h1>
             </div>
             <div className="navbar-links">
                 <NavLink   to="/">Home</NavLink>
